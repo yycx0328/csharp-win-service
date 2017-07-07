@@ -2,3 +2,4 @@ bin/
 obj/
 *.InstallLog
 *.InstallState
+*.v11
