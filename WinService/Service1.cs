@@ -76,6 +76,10 @@ namespace WinService
                  * 
                  * 如果要设置每天执行一次那么可以设置如下判断：
                  * if (iHour == 0 && iMinute == 0)      // 表示每天00:00执行一次
+                 * 
+                 * 以上配置有一个前提条件：在一个定时器中执行多个计划任务，这种设置是非常有效的。
+                 * 再推荐大家一个.NET作业调度框架——Quartz.NET，Quartz 是一个开源的作业调度框架，
+                 * 非常强大，有兴趣可以去了解一下，这里不作过多的详述
                 */
                 if (iMinute % 3 == 0 && isFinished)
                 {
@@ -85,13 +89,11 @@ namespace WinService
                         DateTime startTime = DateTime.Now;
                         logger.Info("======================== 开始执行服务 ========================");
 
-                        int sleepTime = 0;
-                        string strSleepTime = ConfigurationManager.AppSettings["SLEEPTIME"];
-                        if (!int.TryParse(strSleepTime, out sleepTime))
-                            sleepTime = 2;
+                        //// 测试2分钟任务
+                        //Execute(2 * 60);
 
-                        // 测试
-                        Execute(sleepTime * 60);
+                        // 测试5分钟任务
+                        Execute(5 * 60);
 
                         DateTime endTime = DateTime.Now;
                         double totalExeTime = (endTime - startTime).TotalMinutes;
